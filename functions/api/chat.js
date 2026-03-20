@@ -8,7 +8,7 @@ export async function onRequest(context) {
       // Use the Workers AI binding
       const ai = env.AI_BINDING;
       
-      const response = await ai.run('@cf/meta/llama-3.1-8b-instruct', {
+      const response = await ai.run('@cf/meta/llama-3-8b-instruct', {
         messages: [
           {
             role: 'system',
@@ -25,7 +25,8 @@ export async function onRequest(context) {
         headers: { 'Content-Type': 'application/json' }
       });
     } catch (error) {
-      return new Response(JSON.stringify({ error: error.message }), {
+      console.error(error);
+      return new Response(JSON.stringify({ error: error.message, stack: error.stack || "" }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }
       });
