@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Questions</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <script>
+        async function askBob() {
+            const prompt = document.getElementById('prompt').value;
+            const responseElement = document.getElementById('bob-response');
+            responseElement.textContent = "Bob is thinking...";
+            
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                responseElement.textContent = data.response;
+            } catch (error) {
+                console.error('Error:', error);
+                responseElement.textContent = "Sorry, Bob is sleeping right now.";
+            }
+        }
+    </script>
+
+    <body>
+        <table id="navBar">
+            <col style="width:20%">
+            <col style="width:32%">
+            <col style="width:48%">
+            <tr>
+                <td><img src="resources/icon.png"></td>
+                <th>
+                    <h1>Uncle Jack & Sons</h1>
+                </th>
+                <td>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="email.html">Email Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="questions.html" class="active">Questions</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div style="height: 100px;"></div>
+        <h2>Questions</h2>
+        <div style="width: 50%; height: 140%; margin-left: 25%; padding: 40px; background-color: #ccc;">
+            <br>
+            <h3> If you have any questions, you can talk to our friendly chat bot, Bob.</h3>
+            <br>
+            <h3>This is Bob:</h3>
+            <p id="bob-response" style="border: solid 2px black; color: #000; font-size: medium;">Hi, I'm Bob.</p>
+            <table>
+                <tr>
+                    <td><textarea type="text" id="prompt" rows="2" cols="50"></textarea></td>
+                    <td><input type="button" value="Ask Bob" id="submit" onclick="askBob()" class="button"></td>
+                </tr>
+            </table>
+            
+            <br>
+            <br>
+            <br>
+        </div>
+    </body>
+</html>

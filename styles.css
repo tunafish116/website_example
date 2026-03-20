@@ -47,6 +47,11 @@ body{
   background-color: #ddd;
 }
 
+#response{
+    width: 600px;
+    height: 400px;
+}
+
 .parent { 
     position: relative; 
 } 
@@ -109,11 +114,6 @@ input{
 
 input[type="email"]{
     width: 400px;
-}
-
-input[type="text"]{
-    width: 600px;
-    height: 400px;
 }
 
 textarea{
