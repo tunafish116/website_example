@@ -1,7 +1,0 @@
-name = "my-chatbot"
-main = "functions"
-compatibility_date = "2025-01-01"
-account_id = "e8da4a9ac3f56b6808a0ed3c87d2a22a"
-
-[ai]
-binding = "AI_BINDING"
